@@ -333,14 +333,14 @@ end
 
 function DecalBuilder.ApplyDecalAsync(self: Class, params: DecalParams)
 	if not self:IsReadyToApplyDecal() then
-		return nil
+		return false
 	end
 	
 	local meshPart = self._target
 	local mesh = self._sourceMesh
 
 	if not (meshPart and mesh) then
-		return nil
+		return false
 	end
 
 	local size = meshPart.Size
@@ -360,7 +360,7 @@ function DecalBuilder.ApplyDecalAsync(self: Class, params: DecalParams)
 	wireframe:Clear()
 
 	if not newMesh then
-		return nil
+		return false
 	end
 
 	if self._debug then
@@ -506,7 +506,7 @@ function DecalBuilder.ApplyDecalAsync(self: Class, params: DecalParams)
 	end)
 
 	if not success then
-		return nil
+		return false
 	end
 
 	if self._decal and self._decal:IsDescendantOf(game) then
@@ -569,7 +569,7 @@ function DecalBuilder.ApplyDecalAsync(self: Class, params: DecalParams)
 		self._decal = newMeshPart
 	end
 
-	return newMeshPart
+	return true
 end
 
 return DecalBuilder
